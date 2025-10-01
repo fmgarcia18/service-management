@@ -2,9 +2,11 @@ package com.fmgarcia.service.management.accounts.dtos;
 
 import java.io.Serializable;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class AccountRequestDTO implements Serializable{/**
 	 * 
 	 */
