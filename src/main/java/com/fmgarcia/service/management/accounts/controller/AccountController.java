@@ -3,10 +3,12 @@ package com.fmgarcia.service.management.accounts.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +53,13 @@ public class AccountController {
 	    
 	    // 2. Devolver 201 Created con el Location Header
 	    return ResponseEntity.created(location).body(response);
+	}
+	
+	@GetMapping("/{accountNumber}")
+	ResponseEntity<AccountResponseDTO> getAccountByAccountNumber(@PathVariable UUID accountNumber){
+		AccountResponseDTO response = accountService.getAccountByAccountNumber(accountNumber);
+		
+		return ResponseEntity.ok().body(response);
 	}
 
 }

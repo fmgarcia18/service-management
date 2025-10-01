@@ -1,6 +1,8 @@
 package com.fmgarcia.service.management.accounts.services;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -22,13 +24,36 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public List<AccountResponseDTO> getAllAccoutns() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Account> accounts = accountRepository.findAll();
+		
+		List<AccountResponseDTO> response = accounts.stream()
+			        .map(account -> {			            
+			            return AccountResponseDTO.builder()
+			            		.accountNumber(account.getAccountNumber())
+			            		.email(account.getEmail())
+			            		.firstName(account.getFirstName())
+			            		.lastName(account.getLastName())
+			            		.phone(account.getPhone())
+			            		.build();
+			        })
+			        .collect(Collectors.toList());
+		return response;
 	}
 
 	@Override
-	public AccountResponseDTO getAccountByAccountNumber(String accountNumber) {
-		// TODO Auto-generated method stub
-		return null;
+	public AccountResponseDTO getAccountByAccountNumber(UUID accountNumber) {
+
+		Account account = accountRepository.findByAccountNumber(accountNumber);
+		
+		AccountResponseDTO response = AccountResponseDTO.builder()
+        		.accountNumber(account.getAccountNumber())
+        		.email(account.getEmail())
+        		.firstName(account.getFirstName())
+        		.lastName(account.getLastName())
+        		.phone(account.getPhone())
+        		.build();
+				
+		return response;
 	}
 
 	@Override
