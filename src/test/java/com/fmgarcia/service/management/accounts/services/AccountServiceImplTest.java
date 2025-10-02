@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -67,7 +68,7 @@ class AccountServiceImplTest {
         when(accountRepository.findAll()).thenReturn(mockAccounts);
 
         // ACT: Ejecutar el método
-        List<AccountResponseDTO> result = accountService.getAllAccoutns();
+        List<AccountResponseDTO> result = accountService.getAllAccounts();
 
         // ASSERT: Verificar el resultado y las interacciones
         assertNotNull(result);
@@ -85,7 +86,7 @@ class AccountServiceImplTest {
         when(accountRepository.findAll()).thenReturn(Collections.emptyList());
 
         // ACT: Ejecutar el método
-        List<AccountResponseDTO> result = accountService.getAllAccoutns();
+        List<AccountResponseDTO> result = accountService.getAllAccounts();
 
         // ASSERT: Verificar que la respuesta es una lista vacía
         assertNotNull(result);
@@ -100,7 +101,7 @@ class AccountServiceImplTest {
     @Test
     void getAccountByAccountNumber_shouldReturnResponse_whenAccountFound() {
         // ARRANGE: Simular que el repositorio encuentra la entidad por UUID
-        when(accountRepository.findByAccountNumber(TEST_UUID)).thenReturn(testAccount);
+        when(accountRepository.findByAccountNumber(TEST_UUID)).thenReturn(Optional.of(testAccount) );
 
         // ACT: Ejecutar el método
         AccountResponseDTO result = accountService.getAccountByAccountNumber(TEST_UUID);

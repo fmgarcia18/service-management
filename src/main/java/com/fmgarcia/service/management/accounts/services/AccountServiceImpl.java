@@ -1,6 +1,7 @@
 package com.fmgarcia.service.management.accounts.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fmgarcia.service.management.accounts.domain.Account;
 import com.fmgarcia.service.management.accounts.dtos.AccountRequestDTO;
 import com.fmgarcia.service.management.accounts.dtos.AccountResponseDTO;
+import com.fmgarcia.service.management.accounts.exceptions.AccountNotFoundException;
 import com.fmgarcia.service.management.accounts.repository.AccountRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -22,7 +24,7 @@ public class AccountServiceImpl implements AccountService {
 	private final AccountRepository accountRepository;
 	
 	@Override
-	public List<AccountResponseDTO> getAllAccoutns() {
+	public List<AccountResponseDTO> getAllAccounts() {
 		// TODO Auto-generated method stub
 		List<Account> accounts = accountRepository.findAll();
 		
@@ -41,9 +43,11 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public AccountResponseDTO getAccountByAccountNumber(UUID accountNumber) {
+	public AccountResponseDTO getAccountByAccountNumber(UUID accountNumber) throws AccountNotFoundException {
 
-		Account account = accountRepository.findByAccountNumber(accountNumber);
+		Account account = accountRepository.findByAccountNumber(accountNumber)
+				.orElseThrow(() -> new AccountNotFoundException(accountNumber.toString()));
+		
 		
 		AccountResponseDTO response = AccountResponseDTO.builder()
         		.accountNumber(account.getAccountNumber())
@@ -81,7 +85,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public AccountResponseDTO updateAccount(AccountRequestDTO account) {
+	public AccountResponseDTO updateAccount(AccountRequestDTO account) throws AccountNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}

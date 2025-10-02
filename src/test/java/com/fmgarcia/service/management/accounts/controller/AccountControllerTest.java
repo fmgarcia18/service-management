@@ -44,7 +44,7 @@ public class AccountControllerTest {
 	    List<AccountResponseDTO> mockList = Collections.singletonList(mockResponse);
 
 	    // Definir el comportamiento del Mock: cuando se llame a getAllAccoutns(), devuelve mockList
-	    when(accountService.getAllAccoutns()).thenReturn(mockList);
+	    when(accountService.getAllAccounts()).thenReturn(mockList);
 
 	 // ACT & ASSERT (Actuar y Verificar)
 	    mockMvc.perform(get("/accounts")
@@ -61,7 +61,7 @@ public class AccountControllerTest {
 	            .andExpect(jsonPath("$[0].phone").value("1122334455"));
 	            
 	    // 4. VERIFICACIÓN CRÍTICA: Asegurarse de que el servicio mock fue llamado
-	    verify(accountService).getAllAccoutns(); 
+	    verify(accountService).getAllAccounts(); 
 	
 	}
 }

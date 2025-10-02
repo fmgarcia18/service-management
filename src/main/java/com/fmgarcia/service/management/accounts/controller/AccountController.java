@@ -34,7 +34,7 @@ public class AccountController {
 	ResponseEntity<?> getAllAccounts(){
 		log.info("obtiniendo todos los accounts");
 		
-		List<AccountResponseDTO> accounts = accountService.getAllAccoutns();
+		List<AccountResponseDTO> accounts = accountService.getAllAccounts();
 		return ResponseEntity.ok().body(accounts);
 	}
 	
