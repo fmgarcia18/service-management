@@ -1,7 +1,6 @@
 package com.fmgarcia.service.management.accounts.services;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import com.fmgarcia.service.management.accounts.dtos.AccountRequestDTO;
