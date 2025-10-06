@@ -3,8 +3,6 @@ package com.fmgarcia.service.management.cases.domain;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.fmgarcia.service.management.accounts.domain.Account;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -83,8 +81,10 @@ public class Case {
 	private CaseType type;
 	
 	@PrePersist
-	void setCaseNumber() {
+	void setFields() {
 		this.caseNumber = UUID.randomUUID();
+		this.closed = Boolean.FALSE;
+		this.escalated = Boolean.FALSE;
 	}
 
 }

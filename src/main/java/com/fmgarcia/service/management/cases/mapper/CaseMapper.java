@@ -6,10 +6,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 import com.fmgarcia.service.management.cases.domain.Case;
+import com.fmgarcia.service.management.cases.dtos.CaseRequestDTO;
 import com.fmgarcia.service.management.cases.dtos.CaseResponseDTO;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CaseMapper {
 
 	List<CaseResponseDTO> toDtoList(List<Case> cases);
+	
+	Case toCase(CaseRequestDTO request);
+	
+	CaseResponseDTO toDTO(Case entity);
 }
